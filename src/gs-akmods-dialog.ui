@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="4.10"/>
+  <requires lib="adwaita" version="1.0"/>
+  <template class="GsAkmodsDialog" parent="AdwWindow">
+    <property name="title" translatable="no"></property>
+    <property name="default_width">550</property>
+    <property name="width_request">318</property>
+    <property name="default_widget">apply_button</property>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="hexpand">True</property>
+            <property name="show-end-title-buttons">False</property>
+            <property name="show-start-title-buttons">False</property>
+            <child type="start">
+              <object class="GtkButton" id="cancel_button">
+                <property name="label" translatable="yes">_Cancel</property>
+                <property name="can-focus">True</property>
+                <property name="use-underline">True</property>
+                <signal name="clicked" handler="gs_akmods_dialog_cancel_button_clicked_cb"/>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkButton" id="apply_button">
+                <property name="label" translatable="yes">_Restart &amp; Install</property>
+                <property name="can-focus">True</property>
+                <property name="use-underline">True</property>
+                <style>
+                  <class name="destructive-action"/>
+                </style>
+                <signal name="clicked" handler="gs_akmods_dialog_apply_button_clicked_cb"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <property name="content">
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">48</property>
+            <property name="margin-start">48</property>
+            <property name="margin-end">48</property>
+            <property name="margin-top">24</property>
+            <property name="margin-bottom">48</property>
+            <child>
+              <object class="GtkLabel" id="top_info">
+                <property name="hexpand">False</property>
+                <property name="halign">center</property>
+                <property name="use-markup">True</property>
+                <property name="use-underline">False</property>
+                <property name="justify">center</property>
+                <property name="width-chars">40</property>
+                <property name="max-width-chars">60</property>
+                <property name="wrap">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBox">
+                <child>
+                  <object class="AdwPasswordEntryRow" id="password_entry_row">
+                    <property name="title" translatable="yes">MOK Password</property>
+                    <property name="activates-default">True</property>
+                    <signal name="changed" handler="gs_akmods_dialog_password_changed_cb"/>
+                    <style>
+                      <class name="card"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBox">
+                <child>
+                  <object class="GtkListBoxRow">
+                    <style>
+                      <class name="card"/>
+                    </style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">16</property>
+                        <property name="margin-start">16</property>
+                        <property name="margin-end">16</property>
+                        <property name="margin-top">16</property>
+                        <property name="margin-bottom">16</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">info-symbolic</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="bottom_info">
+                            <property name="hexpand">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="use-markup">True</property>
+                            <property name="use-underline">False</property>
+                            <property name="justify">left</property>
+                            <property name="width-chars">40</property>
+                            <property name="max-width-chars">60</property>
+                            <property name="wrap">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+</interface>

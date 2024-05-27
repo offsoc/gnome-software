@@ -9,3 +9,9 @@ if get_option('hardcoded_curated')
     install_dir : join_paths(get_option('datadir'), 'swcatalog', 'xml'),
   )
 endif
+
+if get_option('akmods')
+  install_data('org.gnome.Software.akmods.xml',
+    install_dir : join_paths(get_option('datadir'), 'swcatalog', 'xml'),
+  )
+endif

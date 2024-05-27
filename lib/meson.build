@@ -71,6 +71,11 @@ if get_option('polkit')
   librarydeps += polkit
 endif
 
+akmods_private_files = []
+if get_option('akmods')
+   akmods_private_files = [ 'gs-akmods-private.h', 'gs-akmods-private.c' ]
+endif
+
 gs_build_ident_h = vcs_tag(
      fallback: meson.project_version(),
         input: 'gs-build-ident.h.in',
@@ -132,7 +137,7 @@ libgnomesoftware = library(
     'gs-test.c',
     'gs-utils.c',
     'gs-worker-thread.c',
-  ] + libgnomesoftware_enums + [gs_build_ident_h],
+  ] + libgnomesoftware_enums + [gs_build_ident_h] + akmods_private_files,
   soversion: gs_plugin_api_version,
   include_directories : libgnomesoftware_include_directories,
   dependencies : librarydeps,

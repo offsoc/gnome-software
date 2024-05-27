@@ -37,6 +37,11 @@
 #include "gs-review-dialog.h"
 #include "gs-review-row.h"
 
+#ifdef ENABLE_AKMODS
+#include "gs-akmods-private.h"
+#include "gs-akmods-dialog.h"
+#endif
+
 /* the number of reviews to show before clicking the 'More Reviews' button */
 #define SHOW_NR_REVIEWS_INITIAL		4
 
@@ -1070,6 +1075,12 @@ gs_details_page_refresh_buttons (GsDetailsPage *self)
 		if (gs_app_has_quirk (self->app, GS_APP_QUIRK_NEEDS_REBOOT)) {
 			gtk_widget_set_visible (self->button_install, TRUE);
 			gtk_button_set_label (GTK_BUTTON (self->button_install), _("_Restart"));
+			#ifdef ENABLE_AKMODS
+			if (g_strcmp0 (gs_app_get_metadata_item (self->app, "GnomeSoftware::akmods"), "True") == 0 &&
+			    g_strcmp0 (gs_app_get_metadata_item (self->app, "GnomeSoftware::akmods-pending"), "True") != 0) {
+				gtk_button_set_label (GTK_BUTTON (self->button_install), _("_Enable…"));
+			}
+			#endif
 		} else {
 			gtk_widget_set_visible (self->button_install, FALSE);
 		}
@@ -2288,6 +2299,15 @@ gs_details_page_app_install_button_cb (GtkWidget *widget, GsDetailsPage *self)
 {
 	switch (gs_app_get_state (self->app)) {
 	case GS_APP_STATE_PENDING_INSTALL:
+		#ifdef ENABLE_AKMODS
+		if (gs_app_has_quirk (self->app, GS_APP_QUIRK_NEEDS_REBOOT) &&
+		    g_strcmp0 (gs_app_get_metadata_item (self->app, "GnomeSoftware::akmods"), "True") == 0 &&
+		    g_strcmp0 (gs_app_get_metadata_item (self->app, "GnomeSoftware::akmods-pending"), "True") != 0) {
+			gs_akmods_dialog_run (GTK_WINDOW (gtk_widget_get_ancestor (widget, GTK_TYPE_WINDOW)), self->shell, self->app);
+			return;
+		}
+		#endif
+	/* falls through */
 	case GS_APP_STATE_PENDING_REMOVE:
 		g_return_if_fail (gs_app_has_quirk (self->app, GS_APP_QUIRK_NEEDS_REBOOT));
 		gs_utils_invoke_reboot_async (NULL, NULL, NULL);

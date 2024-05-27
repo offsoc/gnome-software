@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+  <component merge="append">
+    <id>xorg-x11-drv-nvidia-470xx</id>
+    <custom>
+      <value key="GnomeSoftware::akmods">True</value>
+    </custom>
+  </component>
+  <component merge="append">
+    <id>xorg-x11-drv-nvidia</id>
+    <custom>
+      <value key="GnomeSoftware::akmods">True</value>
+    </custom>
+  </component>
+</components>

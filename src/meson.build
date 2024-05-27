@@ -105,6 +105,13 @@ gnome_software_dependencies = [
   libxmlb,
 ]
 
+if get_option('akmods')
+  gnome_software_sources += [
+    'gs-akmods-dialog.h',
+    'gs-akmods-dialog.c',
+  ]
+endif
+
 if get_option('packagekit')
   gnome_software_sources += [
     'gs-dbus-helper.c',

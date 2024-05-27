@@ -1,4 +1,5 @@
 data/metainfo/org.gnome.Software.metainfo.xml.in
+data/org.gnome.software.akmods-helper.policy.in.in
 data/org.gnome.software.external-appstream.policy.in.in
 data/org.gnome.software.gschema.xml
 gs-install-appstream/gs-install-appstream.c
@@ -8,6 +9,8 @@ src/gnome-software-local-file-packagekit.desktop.in
 src/gnome-software-local-file-snap.desktop.in
 src/gs-age-rating-context-dialog.c
 src/gs-age-rating-context-dialog.ui
+src/gs-akmods-dialog.c
+src/gs-akmods-dialog.ui
 lib/gs-app.c
 src/gs-app-addon-row.c
 src/gs-app-addon-row.ui
@@ -104,6 +107,7 @@ src/gs-upgrade-banner.c
 src/gs-upgrade-banner.ui
 lib/gs-utils.c
 src/org.gnome.Software.desktop.in
+plugins/akmods/gs-plugin-akmods.c
 plugins/core/gs-plugin-generic-updates.c
 plugins/eos-updater/gs-plugin-eos-updater.c
 plugins/epiphany/gs-plugin-epiphany.c
