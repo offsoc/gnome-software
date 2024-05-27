@@ -28,6 +28,7 @@ fedora-x86_64:
     - tags
   script:
     - meson ${MESON_COMMON_OPTIONS}
+            -Dakmods=true
             -Drpm_ostree=true
             -Dmalcontent=true
             -Dsysprof=enabled
